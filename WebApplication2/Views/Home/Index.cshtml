@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>KSIĄŻKA KUCHARSKA</h1>
+    <p class="lead">Witaj w naszej internetowej książce kucharskiej, da Ci ona dostęp do tysięcy smacznych przepisów... Wejdź jako gość lub zaloguj się na swoje konto aby móc dodawać i komentować przepisy.</p>
+    <p><a href='@Url.Action("MemberView","Member")' class="btn btn-primary btn-lg">Wejdź &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Przeglądaj przepisy</h2>
+        <p>
+            Używanie serwisu jako gość pozwala na przeglądanie przepisów, bez możliwości ich komentowania. Jako niezalogowany użytkownik nie masz możliwości dodawania własny przepisów.
+        </p>
+        <p><a class="btn btn-default" href='@Url.Action("GuestView","Guest") '>Wejdź jako gość ...//link do strony gościa &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Zaloguj się</h2>
+        <p>Zaloguj się na swoje konto aby móc komentować i dodawać nowe przepisy.</p>
+        <p><a class="btn btn-default" href='@Url.Action("Login", "Account") '>Zaloguj się &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Zarejestruj się</h2>
+        <p>Nie masz jeszcze konta w naszym serwisie?!! Zarejestruj się aby uzyskać dostęp do wszystkich możliwości serwisu...</p>
+        <p><a class="btn btn-default" href='@Url.Action("Register", "Account")'>Zarejestruj się &raquo;</a></p>
+    </div>
+</div>
