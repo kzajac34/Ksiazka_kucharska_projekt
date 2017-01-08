@@ -205,6 +205,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>RecipeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RecipeModel.Context.cs">
@@ -294,6 +297,7 @@
     <Content Include="Views\Member\AddRecView.cshtml" />
     <Content Include="Views\Member\YourRecView.cshtml" />
     <Content Include="Views\Member\YourCommView.cshtml" />
+    <Content Include="Views\Member\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

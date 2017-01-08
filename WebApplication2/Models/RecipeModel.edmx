@@ -4,26 +4,44 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="Recipes">
           <Key>
             <PropertyRef Name="recipe_ID" />
           </Key>
           <Property Name="recipe_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="title" Type="nvarchar" MaxLength="50" />
-          <Property Name="user_ID" Type="nchar" MaxLength="10" />
-          <Property Name="cateogry_ID" Type="nchar" MaxLength="10" />
-          <Property Name="difficulty" Type="nchar" MaxLength="10" />
-          <Property Name="time" Type="nchar" MaxLength="10" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="cateogry_ID" Type="int" />
+          <Property Name="difficulty" Type="int" />
+          <Property Name="time" Type="int" />
           <Property Name="recipe_content" Type="nvarchar(max)" />
-          <Property Name="recipe_date" Type="nchar" MaxLength="10" />
-          <Property Name="comment_ID" Type="nchar" MaxLength="10" />
+          <Property Name="recipe_date" Type="datetime" />
+          <Property Name="comment_ID" Type="int" />
+          <Property Name="picture" Type="image" />
         </EntityType>
         <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recipes" EntityType="Self.Recipes" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -32,18 +50,37 @@
             <PropertyRef Name="recipe_ID" />
           </Key>
           <Property Name="recipe_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="user_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="cateogry_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="difficulty" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="time" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cateogry_ID" Type="Int32" />
+          <Property Name="difficulty" Type="Int32" />
+          <Property Name="time" Type="Int32" />
           <Property Name="recipe_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="recipe_date" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="comment_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="recipe_date" Type="DateTime" Precision="3" />
+          <Property Name="comment_ID" Type="Int32" />
+          <Property Name="picture" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Recipes" EntityType="Self.Recipes" />
+          <EntitySet Name="AspNetUsers" EntityType="Model.AspNetUsers" />
         </EntityContainer>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -53,15 +90,34 @@
           <EntitySetMapping Name="Recipes">
             <EntityTypeMapping TypeName="Model.Recipes">
               <MappingFragment StoreEntitySet="Recipes">
+                <ScalarProperty Name="difficulty" ColumnName="difficulty" />
+                <ScalarProperty Name="cateogry_ID" ColumnName="cateogry_ID" />
+                <ScalarProperty Name="user_ID" ColumnName="user_ID" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="picture" ColumnName="picture" />
                 <ScalarProperty Name="recipe_ID" ColumnName="recipe_ID" />
                 <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="user_ID" ColumnName="user_ID" />
-                <ScalarProperty Name="cateogry_ID" ColumnName="cateogry_ID" />
-                <ScalarProperty Name="difficulty" ColumnName="difficulty" />
-                <ScalarProperty Name="time" ColumnName="time" />
                 <ScalarProperty Name="recipe_content" ColumnName="recipe_content" />
                 <ScalarProperty Name="recipe_date" ColumnName="recipe_date" />
                 <ScalarProperty Name="comment_ID" ColumnName="comment_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Model.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

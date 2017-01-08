@@ -17,11 +17,12 @@ namespace WebApplication2.Models
         public int recipe_ID { get; set; }
         public string title { get; set; }
         public string user_ID { get; set; }
-        public string cateogry_ID { get; set; }
-        public string difficulty { get; set; }
-        public string time { get; set; }
+        public Nullable<int> cateogry_ID { get; set; }
+        public Nullable<int> difficulty { get; set; }
+        public Nullable<int> time { get; set; }
         public string recipe_content { get; set; }
-        public string recipe_date { get; set; }
-        public string comment_ID { get; set; }
+        public Nullable<System.DateTime> recipe_date { get; set; }
+        public Nullable<int> comment_ID { get; set; }
+        public byte[] picture { get; set; }
     }
 }

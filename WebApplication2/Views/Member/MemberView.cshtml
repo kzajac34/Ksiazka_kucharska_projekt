@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<WebApplication2.Models.Recipes>
-
 @{
     ViewBag.Title = "MemberView";
 }
@@ -11,6 +10,9 @@
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.recipe_ID)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.title)
         </th>
@@ -35,11 +37,17 @@
         <th>
             @Html.DisplayNameFor(model => model.comment_ID)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.picture)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.recipe_ID)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.title)
         </td>
@@ -65,9 +73,11 @@
             @Html.DisplayFor(modelItem => item.comment_ID)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.recipe_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.recipe_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.recipe_ID })
+            @{ 
+                var base64 = Convert.ToBase64String(item.picture);
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+            }
+            <img src='@imgsrc' style="max-width:100px;"/>
         </td>
     </tr>
 }
