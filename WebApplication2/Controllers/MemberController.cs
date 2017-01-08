@@ -9,15 +9,29 @@ namespace WebApplication2.Controllers
     [Authorize]
     public class MemberController : Controller
     {
+        Models.Entities db = new Models.Entities();
         //główna po zalogowaniu
         public ActionResult MemberView()
         {
-            return View();
+            return View(db.Recipes.ToList());
         }
         //dodawanie przepisu
+        [HttpGet]
         public ActionResult AddRecView()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult AddRecView(Models.Recipes recipe)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Recipes.Add(recipe);
+                db.SaveChanges();
+                return RedirectToAction("MemberView");
+            }
+
+            return View(recipe);
         }
         //przepisy urzytkownika
         public ActionResult YourRecView()

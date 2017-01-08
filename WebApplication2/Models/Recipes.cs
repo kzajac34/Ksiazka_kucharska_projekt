@@ -16,12 +16,12 @@ namespace WebApplication2.Models
     {
         public int recipe_ID { get; set; }
         public string title { get; set; }
-        public int user_ID { get; set; }
-        public int cateogry_ID { get; set; }
-        public int difficulty { get; set; }
-        public DateTime time { get; set; }
+        public string user_ID { get; set; }
+        public string cateogry_ID { get; set; }
+        public string difficulty { get; set; }
+        public string time { get; set; }
         public string recipe_content { get; set; }
         public string recipe_date { get; set; }
-        public int comment_ID { get; set; }
+        public string comment_ID { get; set; }
     }
 }
