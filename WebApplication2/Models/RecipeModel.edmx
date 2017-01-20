@@ -22,6 +22,13 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="category_ID" />
+          </Key>
+          <Property Name="category_ID" Type="int" Nullable="false" />
+          <Property Name="category_name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Recipes">
           <Key>
             <PropertyRef Name="recipe_ID" />
@@ -39,6 +46,7 @@
         </EntityType>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recipes" EntityType="Self.Recipes" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -63,6 +71,7 @@
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Recipes" EntityType="Self.Recipes" />
           <EntitySet Name="AspNetUsers" EntityType="Model.AspNetUsers" />
+          <EntitySet Name="Category" EntityType="Model.Category" />
         </EntityContainer>
         <EntityType Name="AspNetUsers">
           <Key>
@@ -80,6 +89,13 @@
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="category_ID" />
+          </Key>
+          <Property Name="category_ID" Type="Int32" Nullable="false" />
+          <Property Name="category_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -118,6 +134,14 @@
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="Model.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+                <ScalarProperty Name="category_ID" ColumnName="category_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

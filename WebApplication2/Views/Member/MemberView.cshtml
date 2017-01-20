@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<WebApplication2.Models.Recipes>
 @{
     ViewBag.Title = "MemberView";
+    var Category = (IEnumerable<WebApplication2.Models.Category>)ViewBag.Category;
+    var Users = (IEnumerable<WebApplication2.Models.AspNetUsers>)ViewBag.Users;
 }
 
 <h2>MemberView</h2>
@@ -52,10 +54,10 @@
             @Html.DisplayFor(modelItem => item.title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.user_ID)
+            @Html.DisplayFor(modelItem => Users.Where(a => a.Id == item.user_ID).ElementAt(0).UserName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.cateogry_ID)
+            @Html.DisplayFor(modelItem => Category.Where(a => a.category_ID == item.cateogry_ID).ElementAt(0).category_name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.difficulty)

@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "AddRecView";
+    IEnumerable<int> trudnosc = Enumerable.Range(1, 10);
 }
 
 <h2>Dodaj przepis</h2>
@@ -36,7 +37,7 @@
                 <div class="form-group">
                     @Html.Label("Kategoria: ", htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.cateogry_ID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.DropDownListFor(model => model.cateogry_ID, new SelectList((IEnumerable<WebApplication2.Models.Category>)ViewBag.Category,"category_ID", "category_name"),"Wybierz kategorię", new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.cateogry_ID, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -47,7 +48,7 @@
                 <div class="form-group" >
                     @Html.Label("Poziom trudności:", htmlAttributes: new { @class = "control-label col-md-4 " })
                     <div class="col-md-8">
-                        @Html.EditorFor(model => model.difficulty, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.DropDownListFor(model => model.difficulty,new SelectList(trudnosc),"Wybierz poziom trudności 1-10", new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.difficulty, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -80,7 +81,7 @@
         <div class="form-group">
             @Html.Label("Treść przepisu:")
             <div >
-                @Html.TextAreaFor(model => model.recipe_content, 10, 40, htmlAttributes: new { style = "width: 100%; max-width: 100%;" })
+                @Html.TextAreaFor(model => model.recipe_content, 18, 40, htmlAttributes: new { @class = "form-control", style = "width: 100%; max-width: 100%;" })
                 @Html.ValidationMessageFor(model => model.recipe_content, "", new { @class = "text-danger" })
             </div>
         </div>

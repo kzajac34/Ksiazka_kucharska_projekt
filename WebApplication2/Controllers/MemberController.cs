@@ -15,13 +15,15 @@ namespace WebApplication2.Controllers
         //główna po zalogowaniu
         public ActionResult MemberView()
         {
-            
+            ViewBag.Category = db.Category.ToList();
+            ViewBag.Users = db.AspNetUsers.ToList();
             return View(db.Recipes.ToList());
         }
         //dodawanie przepisu
         [HttpGet]
         public ActionResult AddRecView()
         {
+            ViewBag.Category = db.Category.ToList();
             return View();
         }
         [HttpPost]

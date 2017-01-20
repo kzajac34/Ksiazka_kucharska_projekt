@@ -27,5 +27,6 @@ namespace WebApplication2.Models
     
         public virtual DbSet<Recipes> Recipes { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
     }
 }
