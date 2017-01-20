@@ -11,9 +11,10 @@ namespace WebApplication2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Recipes
     {
+        
         public int recipe_ID { get; set; }
         public string title { get; set; }
         public string user_ID { get; set; }

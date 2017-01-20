@@ -79,7 +79,7 @@ namespace WebApplication2.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal("/Member/MemberView");//w argumencue było returnUrl
+                    return RedirectToLocal("/Home/RecipesView");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

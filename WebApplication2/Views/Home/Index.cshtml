@@ -5,7 +5,16 @@
 <div class="jumbotron">
     <h1>KSIĄŻKA KUCHARSKA</h1>
     <p class="lead">Witaj w naszej internetowej książce kucharskiej, da Ci ona dostęp do tysięcy smacznych przepisów... Wejdź jako gość lub zaloguj się na swoje konto aby móc dodawać i komentować przepisy.</p>
-    <p><a href='@Url.Action("MemberView","Member")' class="btn btn-primary btn-lg">Wejdź &raquo;</a></p>
+    <p>
+        @if (Request.IsAuthenticated)
+        {
+            <a href='@Url.Action("RecipesView","Home")' class="btn btn-primary btn-lg">Wejdź &raquo;</a>
+        }
+        else
+        {
+            <a href='@Url.Action("Login", "Account")' class="btn btn-primary btn-lg">Wejdź &raquo;</a>
+        }
+    </p>
 </div>
 
 <div class="row">
@@ -14,7 +23,7 @@
         <p>
             Używanie serwisu jako gość pozwala na przeglądanie przepisów, bez możliwości ich komentowania. Jako niezalogowany użytkownik nie masz możliwości dodawania własny przepisów.
         </p>
-        <p><a class="btn btn-default" href='@Url.Action("GuestView","Guest") '>Wejdź jako gość ...//link do strony gościa &raquo;</a></p>
+        <p><a class="btn btn-default" href='@Url.Action("RecipesView","Home") '>Wejdź jako gość &raquo;</a></p>
     </div>
     <div class="col-md-4">
         <h2>Zaloguj się</h2>

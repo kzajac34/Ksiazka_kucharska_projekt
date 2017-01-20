@@ -12,13 +12,6 @@ namespace WebApplication2.Controllers
     public class MemberController : Controller
     {
         Models.Entities db = new Models.Entities();
-        //główna po zalogowaniu
-        public ActionResult MemberView()
-        {
-            ViewBag.Category = db.Category.ToList();
-            ViewBag.Users = db.AspNetUsers.ToList();
-            return View(db.Recipes.ToList());
-        }
         //dodawanie przepisu
         [HttpGet]
         public ActionResult AddRecView()
@@ -38,7 +31,7 @@ namespace WebApplication2.Controllers
                 image1.InputStream.Read(recipe.picture, 0, image1.ContentLength);
                 db.Recipes.Add(recipe);
                 db.SaveChanges();
-                return RedirectToAction("MemberView");
+                return RedirectToAction("RecipesView","Home");
             }
 
             return View(recipe);

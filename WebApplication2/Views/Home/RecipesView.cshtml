@@ -1,0 +1,103 @@
+﻿@model  WebApplication2.Controllers.modelClass
+
+@{
+    ViewBag.Title = "RecipesView";
+    var Category = (IEnumerable<WebApplication2.Models.Category>)Model.db.Category;
+    var Users = (IEnumerable<WebApplication2.Models.AspNetUsers>)Model.db.AspNetUsers;
+    var Recipes = (IEnumerable<WebApplication2.Models.Recipes>)Model.db.Recipes;
+}
+
+<h2>Przepisy</h2>
+
+<p>
+    @Html.ActionLink("Dodaj przepis", "AddRecView", "Member")
+</p>
+
+<div class="row">
+    <div class="col-md-2 col-xs-12">
+ 
+        @Html.DropDownListFor(model => model.selectedRecipe, new SelectList((IEnumerable<WebApplication2.Models.Category>)ViewBag.Category, "category_ID", "category_name"), "Wybierz kategorię", new { @id="Droplist1" ,@class = "form-control" })
+
+    </div>
+
+    <div class="col-md-10 col-xs-12">
+        <div id="partial1">
+            Przepisy
+        </div>
+    </div>
+</div>
+
+
+
+<table class="table">
+  
+    @foreach (var item in Recipes)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.recipe_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Users.Where(a => a.Id == item.user_ID).ElementAt(0).UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Category.Where(a => a.category_ID == item.cateogry_ID).ElementAt(0).category_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.difficulty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.recipe_content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.recipe_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.comment_ID)
+            </td>
+            <td>
+                @{
+                    var base64 = Convert.ToBase64String(item.picture);
+                    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                }
+                <img src='@imgsrc' style="max-width:100px;" />
+            </td>
+        </tr>
+                    }
+
+</table>
+
+<span id="span1"></span>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(this.document).ready(function () {
+      
+        $('#Droplist1').change(function () {
+
+            var selectedID = $('#Droplist1').val();
+            $.ajax({
+                type: "GET",
+                url: "/Home/_partial",
+                data: { id: selectedID },
+                success: function (data) {
+                    $("#partial1").html(data);
+                    $('#partial1').fadeIn('fast');
+                },
+                error: function(){
+                    alert("BŁĄD");
+                }
+                
+            });
+           
+        });
+    });
+</script>
+
+

@@ -11,7 +11,7 @@ namespace WebApplication2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Category
     {
         public int category_ID { get; set; }
