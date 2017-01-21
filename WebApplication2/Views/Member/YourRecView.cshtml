@@ -12,28 +12,22 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.title)
+                @Html.DisplayName("Tytuł")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.user_ID)
+                @Html.DisplayName("Kategoria")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.cateogry_ID)
+                @Html.DisplayName("Poziom trudności")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.difficulty)
+                @Html.DisplayName("Czas przygotowania")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.time)
+                @Html.DisplayName("Data dodania")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.recipe_content)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.recipe_date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.comment_ID)
+                @Html.DisplayName("Zdjęcie")
             </th>
             <th></th>
         </tr>
@@ -41,11 +35,8 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td style="font-size:18px">
                     @Html.DisplayFor(modelItem => item.title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.user_ID)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.cateogry_ID)
@@ -57,17 +48,18 @@
                     @Html.DisplayFor(modelItem => item.time)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.recipe_content)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.recipe_date)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.comment_ID)
+                    @{
+                        var base64 = Convert.ToBase64String(item.picture);
+                        var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                    }
+                    <img src='@imgsrc' style="max-height:70px;" />
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.recipe_ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.recipe_ID }, FormMethod.Post)
+                    @Html.ActionLink("Edytuj", "Edit", new { id = item.recipe_ID }) |
+                    @Html.ActionLink("Usuń", "Delete", new { id = item.recipe_ID }, FormMethod.Post)
                 </td>
             </tr>
         }

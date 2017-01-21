@@ -2,85 +2,72 @@
 
 @{
     ViewBag.Title = "Delete";
+    var Category = (IEnumerable<WebApplication2.Models.Category>)ViewBag.Category;
+    var Users = (IEnumerable<WebApplication2.Models.AspNetUsers>)ViewBag.Users;
 }
 
-<h2>Delete</h2>
+<h2>Usuwanie przepisu </h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Jesteś pewnien że chcesz usunać poniższy przepis?</h3>
 <div>
-    <h4>Recipes</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.title)
+        <dt style="font-size:22px">
+            @Html.DisplayName("Tytuł")
         </dt>
 
-        <dd>
+        <dd style="font-size:22px">
             @Html.DisplayFor(model => model.title)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.user_ID)
+            @Html.DisplayName("Autor")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.user_ID)
+            @Html.DisplayName(Users.Where(a => a.Id == Model.user_ID).ElementAt(0).UserName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.cateogry_ID)
+            @Html.DisplayName("Kategoria")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.cateogry_ID)
+            @Html.DisplayName(Category.Where(a => a.category_ID == Model.cateogry_ID).ElementAt(0).category_name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.difficulty)
+            @Html.DisplayName("Poziom trudności")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.difficulty)
+            @Html.DisplayFor(model => model.difficulty)/10
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.time)
+            @Html.DisplayName("Czas przygotowania")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.time)
+            @Html.DisplayFor(model => model.time) min
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.recipe_content)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.recipe_content)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.recipe_date)
+            @Html.DisplayName("Data dodania")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.recipe_date)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.comment_ID)
+            @Html.DisplayName("Zdjęcie")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.comment_ID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.picture)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.picture)
+            @{
+                var base64 = Convert.ToBase64String(Model.picture);
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+            }
+            <img src='@imgsrc' style="max-height:70px;" />
         </dd>
 
     </dl>
@@ -89,8 +76,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Usuń" class="btn btn-default" /> |
+            @Html.ActionLink("Powrót do listy", "YourRecView")
         </div>
     }
 </div>

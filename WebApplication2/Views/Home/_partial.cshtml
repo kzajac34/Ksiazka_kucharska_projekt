@@ -1,4 +1,77 @@
-﻿PARTIAL TEST
+﻿@model  WebApplication2.Controllers.modelClass
+
+@{
+    var Category = (IEnumerable<WebApplication2.Models.Category>)Model.db.Category;
+    var Users = (IEnumerable<WebApplication2.Models.AspNetUsers>)Model.db.AspNetUsers;
+    var Recipes = (IEnumerable<WebApplication2.Models.Recipes>)Model.db.Recipes.Where(a => a.recipe_ID.ToString() == Model.selectedRecipe);
+    
+}
+
 <div>
-    <button>PARTIAL</button>
-</div>
+
+   @foreach (var item in Recipes)
+        {
+            <h1 class="text-center" style="font-size:48px" >@Html.DisplayFor(modelItem => item.title)</h1>
+            <div class="col-md-6 col-xs-6 ">
+
+                <div class="col-md-6 col-xs-12 form-control">
+
+                    @Html.Label("Autor:")
+                    @Html.DisplayFor(modelItem => Users.Where(a => a.Id == item.user_ID).ElementAt(0).UserName)
+
+                </div>
+
+                <div class="col-md-6 col-xs-12 form-control">
+
+                    @Html.Label("Kategoria:")
+                    @Html.DisplayFor(modelItem => Category.Where(a => a.category_ID == item.cateogry_ID).ElementAt(0).category_name)
+
+                </div>
+
+                <div class="col-md-6 col-xs-12 form-control">
+                    @Html.Label("Poziom trudności:")
+                    @Html.DisplayFor(modelItem => item.difficulty)/10
+
+                </div>
+
+                <div class="col-md-6 col-xs-12 form-control">
+                    @Html.Label("Czas przygotowania")
+                    @Html.DisplayFor(modelItem => item.time) min
+
+                </div>
+
+                <div class="col-md-6 col-xs-12 form-control">
+                    @Html.Label("Data wstawienia przepisu:")
+                    @Html.DisplayFor(modelItem => item.recipe_date)
+
+                </div>
+            </div>
+
+            
+                <div class="col-md-6 col-xs-6  ">
+                
+                    
+
+                    @{
+                        var base64 = Convert.ToBase64String(item.picture);
+                        var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                    }
+                    <img src='@imgsrc' style="max-height:200px;" />
+
+                </div>
+                    
+            <hr />
+
+            <div class="col-md-12 col-xs-2  ">
+                <hr />
+            </div>
+
+                <div class="col-md-12 col-xs-10 well well-lg">
+                    @Html.Raw(item.recipe_content.Replace(Environment.NewLine, "<br/>"))
+                </div>
+
+
+                }
+
+
+            </div>
